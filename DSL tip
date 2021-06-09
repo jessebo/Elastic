@@ -1,0 +1,32 @@
+1. 空搜索，返回index下的前10个文档
+----GET /banma_poi_pre/_search?timeout=10ms
+
+2. 分页
+----GET /banma_poi_pre/_search?size=20&from=10
+
+3. 轻量化搜索
+----GET /banma_poi_pre/_search?q=poiId:B0H6SZXZNG
+
+4. _all字段查询
+
+
+
+5.建立倒排索引的过程
+https://www.elastic.co/guide/cn/elasticsearch/guide/current/analysis-intro.html#analysis-intro
+字符过滤器
+首先，字符串按顺序通过每个 字符过滤器 。他们的任务是在分词前整理字符串。一个字符过滤器可以用来去掉HTML，或者将 & 转化成 and。
+
+分词器
+其次，字符串被 分词器 分为单个的词条。一个简单的分词器遇到空格和标点的时候，可能会将文本拆分成词条。
+
+Token 过滤器
+最后，词条按顺序通过每个 token 过滤器 。这个过程可能会改变词条（例如，小写化 Quick ），删除词条（例如， 像 a， and， the 等无用词），或者增加词条（例如，像 jump 和 leap 这种同义词）。
+
+https://www.elastic.co/guide/cn/elasticsearch/guide/current/custom-analyzers.html  自定义分析器
+
+  查看一个分析过程
+  GET /banma_poi_pre/_analyze
+  {
+    "analyzer": "english",  //standard english  hanlp
+    "text": "Q124AA"
+  }
